@@ -1,0 +1,28 @@
+
+
+
+stack   *****     
+    smaller but fixed    
+
+heap    *********************************
+    larger but not fixed
+
+array is limited bcoz its on the stack
+
+linked list is limited becoz access of members is slower
+
+linked_list_node{
+    data;
+    *next
+}
+
+allocate on heap -> head;
+head.next -> node1
+
+
+arraylist 
+{
+    databuff;       -> array on the heap
+    length;         -> number of elements present in the arraylist
+    capacity;       -> maximum size of the arraylist
+}

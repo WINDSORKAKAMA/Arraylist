@@ -1,0 +1,74 @@
+    The old pop() function was depricated due to boilerplate while handling conditional logic to determine
+    between inuse or n_inuse is null or non null.
+    OLD pop():
+
+    void push(ArrayList* arr, int data){
+    if(arr->length < arr->capacity){
+        if(arr->n_inuse == 0)
+            arr->inuse[arr->length] = data;
+        else
+            arr->n_inuse[arr->length] = data;
+        }
+
+    else{
+        arr->capacity *= 2;
+        if(arr->n_inuse == 0){
+            arr->n_inuse = (int*)malloc(sizeof arr->n_inuse * arr->capacity / 2);
+            copy(arr->inuse, arr->n_inuse, arr->capacity);
+
+            arr->n_inuse[arr->length] = data;
+
+            free(arr->inuse);
+            arr->inuse = 0;
+        }
+
+        else{
+            arr->inuse = (int*)malloc(sizeof arr->inuse * arr->capacity / 2);
+            copy(arr->n_inuse, arr->inuse, arr->capacity);
+
+            arr->inuse[arr->length] = data;
+
+            free(arr->n_inuse);
+            arr->n_inuse = 0;
+        }
+
+    }
+
+    arr->length += 1;
+}
+
+new pop() uses less boilerplate by using two macros, nullp and nnullp:
+
+// nullp is equal to the address of the null pointer
+#define nullp(arrlist) ((arrlist->n_inuse == 0) ? &arrlist->n_inuse : &arrlist->inuse) 
+
+// nnullp is equal to the address of the non-null pointer
+#define nnullp(arrlist) ((arrlist->n_inuse == 0) ? &arrlist->inuse : &arrlist->n_inuse)
+
+- to determine the addresses of the null and non-null pointer(s) respectively. The values are then assigned to
+internally specified double int pointers and the push function is implemented once no matter which pointer is
+null or not. NEW pop() implementation:
+
+    void push(ArrayList* arr, int data){
+        int **n_nullptr , **nullptr;
+
+        /* Determine the non null and null pointer(s) */
+        n_nullptr = nnullp(arr);
+        nullptr = nullp(arr);
+
+        if(arr->length < arr->capacity)
+            *n_nullptr[arr->length] = data;
+
+        else{
+            arr->capacity *= 2;
+            *nullptr = (int*)malloc(sizeof *nullptr * arr->capacity);
+
+            copy(*n_nullptr, *nullptr, arr->capacity);
+
+            free(*n_nullptr);
+            *n_nullptr = 0;
+
+            *nullptr[arr->length] = data;
+        }
+        arr->length += 1;
+    }

@@ -1,0 +1,23 @@
+Hey! This is a remainder that since I am a dum-dum and decided not to learn make
+compilation is a bit of a mouthful.
+
+This is how you do it without using a build system like make:
+
+    The commands below compile test1.c and produces an executable file, exe:
+
+
+        gcc arrlist.c testcomp.c -o exe
+
+
+    Where arrlist.c is the implementation file for arrlist.h. 
+
+    You have to specify to the compiler the implementation files of your headers to the compiler. 
+    Essenetially, the build system automates this for you.
+
+    OH! also, you for this to work, remove both both arrlist.c from the  sub-directory src and make it an inpependent file.
+    in the main directory. Atleast on MY Machine, thats how it works
+
+    Kakama windsor
+    23:51
+    Tue- 14 Jan 2025
+    
