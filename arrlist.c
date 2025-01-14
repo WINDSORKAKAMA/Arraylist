@@ -1,7 +1,10 @@
+// Source File definitions
+
 #include "arrlist.h"
 
     #ifndef SUPPORT 0
         #define SUPPORT 0
+
         int pass(ArrayList* arr, int index){
             if(arr->n_inuse == 0)
                 return *(arr->inuse + index);
@@ -9,6 +12,7 @@
                 return *(arr->n_inuse + index);
         }
 
+        // TODO: Identify root cause of the defectiveness of use()
         void use(ArrayList* arr, int index, int* addr){
             if(arr->n_inuse == 0)
                 addr = arr->inuse + index;
