@@ -1,7 +1,7 @@
 #include "arrlist.c"
 #include <stdio.h>
 
-// Test push alloc features
+// Test push() heap allocation features
 int main(){
     ArrayList array;
     initArrayList(&array, 4);
