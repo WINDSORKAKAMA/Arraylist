@@ -1,4 +1,3 @@
-// Testing pushing and 
 #include <stdio.h>
 #include "arrlist.h"
 
